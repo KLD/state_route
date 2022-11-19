@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class ProfileEditPage extends StatefulWidget {
   @override
@@ -30,6 +31,15 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Profile"),
+        actions: [
+          IconButton(
+              onPressed: () {
+                context.push("/task");
+              },
+              icon: Icon(
+                Icons.bookmark_added_rounded,
+              ))
+        ],
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
