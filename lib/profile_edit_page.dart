@@ -31,14 +31,21 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Profile"),
+        leading: IconButton(
+          icon: Icon(Icons.text_fields),
+          onPressed: () {
+            context.go("/name");
+          },
+        ),
         actions: [
           IconButton(
-              onPressed: () {
-                context.push("/task");
-              },
-              icon: Icon(
-                Icons.bookmark_added_rounded,
-              ))
+            onPressed: () {
+              context.push("/task");
+            },
+            icon: Icon(
+              Icons.bookmark_added_rounded,
+            ),
+          ),
         ],
       ),
       body: Column(
@@ -62,13 +69,15 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
           ),
           Expanded(
               child: Center(
-            child: CircleAvatar(
-              radius: radius,
-              foregroundImage: selectedAnimal == null
-                  ? null
-                  : AssetImage(animalImages[selectedAnimal]!),
-              backgroundColor: Colors.grey[200],
-            ),
+            child: selectedAnimal == null
+                ? SizedBox()
+                : CircleAvatar(
+                    radius: radius,
+                    foregroundImage: selectedAnimal == null
+                        ? null
+                        : AssetImage(animalImages[selectedAnimal]!),
+                    backgroundColor: Colors.grey[200],
+                  ),
           )),
           Padding(
             padding: const EdgeInsets.all(18.0),
@@ -76,7 +85,7 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   ElevatedButton(
-                      onPressed: radius <= minRadius
+                      onPressed: selectedAnimal == null || radius <= minRadius
                           ? null
                           : () {
                               setState(() {
@@ -85,7 +94,7 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                             },
                       child: Icon(Icons.remove)),
                   ElevatedButton(
-                      onPressed: radius >= maxRadius
+                      onPressed: selectedAnimal == null || radius >= maxRadius
                           ? null
                           : () {
                               setState(() {
